@@ -15,3 +15,6 @@
   border: 1px solid rgba(255, 255, 255, 1);
 }
 
+::-webkit-scrollbar {
+  @apply hidden;
+}
