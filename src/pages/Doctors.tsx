@@ -1,8 +1,10 @@
-import React from 'react'
+import { doctors } from "../assets/assets"
 
 const Doctors = () => {
   return (
-    <div>Doctors</div>
+    <div>
+      
+    </div>
   )
 }
 

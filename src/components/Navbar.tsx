@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { assets } from "../assets/assets";
 import { NavLink, useNavigate } from "react-router-dom";
+import {Icon} from "@iconify/react";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -9,12 +10,17 @@ const Navbar = () => {
 
   return (
     <div className="glass px-4 mt-2 flex justify-between items-center py-4 text-sm mb-5 border-b border-b-gray-400">
-      <img
+      {/* <img
         className="w-44 cursor-pointer"
         src={assets.logo}
         alt="Logo"
         srcSet=""
-      />
+      /> */}
+      <div className="flex flex-row relative items-center gap-2 cursor-pointer">
+      <Icon icon={"raphael:paper"} className="w-10 h-10 text-primary"/>
+      <p className="italic text-xl absolute line-clamp-1 w-44 text-zinc-500 font-bold text-center scale-110"><span className="text-primary">Eazy</span>Care</p>
+      </div>
+
       <ul className="hidden md:flex items-start gap-5 font-medium">
         <NavLink to={"/home"}>
           <li className="py-1 uppercase">Home</li>
