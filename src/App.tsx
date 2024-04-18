@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import MyAppointments from "./pages/MyAppointments";
 import MyProfile from "./pages/MyProfile";
+import Footer from "./pages/Footer";
 
 export default function App() {
   return (
@@ -23,7 +24,7 @@ export default function App() {
         <Route path="/my-appointments" element={<MyAppointments/>}></Route>
         <Route path="/appointment/:docId" element={<Appointments/>}></Route>
       </Routes>
-      Hi
+      <Footer/>
     </div>
   )
 }
