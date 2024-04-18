@@ -5,7 +5,7 @@ import {Icon} from "@iconify/react";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [showMenu, setShowMenu] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false);
   const [token, setToken] = useState(true);
 
   return (
@@ -16,7 +16,7 @@ const Navbar = () => {
         alt="Logo"
         srcSet=""
       /> */}
-      <div className="flex flex-row relative items-center gap-2 cursor-pointer">
+      <div onClick={() => navigate("/")} className="flex flex-row relative items-center gap-2 cursor-pointer">
       <Icon icon={"raphael:paper"} className="w-10 h-10 text-primary"/>
       <p className="italic text-xl absolute line-clamp-1 w-44 text-zinc-500 font-bold text-center scale-110"><span className="text-primary">Eazy</span>Care</p>
       </div>

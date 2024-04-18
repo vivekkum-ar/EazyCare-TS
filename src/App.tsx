@@ -18,6 +18,7 @@ export default function App() {
         <Route path="/home" element={<Home/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/doctors/:speciality" element={<Doctors/>}></Route>
+        <Route path="/doctors" element={<Doctors/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/my-profile" element={<MyProfile/>}></Route>
