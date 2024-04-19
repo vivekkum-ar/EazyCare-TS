@@ -1,9 +1,12 @@
 import { createContext } from "react";
 import { doctors } from "../assets/assets";
 
-export const AppContext = createContext<Value>({ doctors: [] });
+export const AppContext = createContext<Value>({
+    doctors: [],
+    currencySymbol: ""
+});
 
-interface Value {
+export interface Value {
     doctors: {
         _id: string;
         name: string;
@@ -18,10 +21,15 @@ interface Value {
             line2: string;
         };
     }[];
+    currencySymbol: string;
 }
 const AppContextProvider = (props:any) => {
+
+    const currencySymbol = "₹";
+
     const value:Value = {
-        doctors
+        doctors,
+        currencySymbol
     }
     
     return (
