@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import MyAppointments from "./pages/MyAppointments";
 import MyProfile from "./pages/MyProfile";
 import Footer from "./pages/Footer";
+import Contact from "./pages/Contact";
 
 export default function App() {
   return (
@@ -20,7 +21,7 @@ export default function App() {
         <Route path="/doctors/:speciality" element={<Doctors/>}></Route>
         <Route path="/doctors" element={<Doctors/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
-        <Route path="/about" element={<About/>}></Route>
+        <Route path="/Contact" element={<Contact/>}></Route>
         <Route path="/my-profile" element={<MyProfile/>}></Route>
         <Route path="/my-appointments" element={<MyAppointments/>}></Route>
         <Route path="/appointment/:docId" element={<Appointments/>}></Route>
