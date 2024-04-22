@@ -58,6 +58,136 @@ export const assets = {
     razorpay_logo
 }
 
+export const medicalTests = {
+    HAEMOTOLOGY: {
+      "COMPLETE BLOOD PICTURE": 300,
+      "HB%": 50,
+      "ABSOLUTE EOSINOPHIL COUNT (AEC)": 200,
+      "BLOOD GROUPING / RH TYPING": 50,
+      "BLEEDING TIME / CLOTTING TIME": 100,
+      "ESR": 50,
+      "PLATELET COUNT": 200
+    },
+    BIOCHEMISTRY: {
+      "FASTING BLOOD SUGAR": 50,
+      "POST PRANDIAL BLOOD SUGAR": 50,
+      "RANDOM BLOOD SUGAR": 50,
+      "HBA1C": 500,
+      "GCT": 50,
+      "GTT": 200,
+      "UREA": 150,
+      "SERUM CREATININE": 100,
+      "URIC ACID": 200,
+      "CALCIUM": 100,
+      "TOTAL CHOLESTEROL": 150,
+      "TRIGLYCERIDES": 150,
+      "TOTAL BILIRUBIN": 100,
+      "SGOT": 150,
+      "SGPT": 150,
+      "ALKALINE PHOSPHATASE": 100,
+      "TOTAL PROTEINS": 100,
+      "SERUM AMYLASE": 500,
+      "SERUM LIPASE": 500
+    },
+    SEROLOGY: {
+      "WIDAL": 100,
+      "CRP": 300,
+      "DENGUE (IGM / IGG)": 800,
+      "CHICKUNGUNYA (IGG / IGM)": 800,
+      "MALARIA (PF / PV)": 300,
+      "ASO": 300,
+      "RHEUMATOID FACTOR (RA)": 300,
+      "TPHA": 100,
+      "VDRL": 100,
+      "HIV 1&2": 300,
+      "HCV": 300,
+      "HBSAG": 200,
+      "TROPONIN –I": 800
+    },
+    URINE: {
+      "COMPLETE URINE EXAMINATION": 100,
+      "URINE KETONE BODIES": 50,
+      "URINE SUGAR": 50,
+      "PREGNANCY TEST": 100,
+      "CULTURE & SENSITIVITY": 1000
+    },
+    MOTION: {
+      "MOTION ROUTINE ANALYSIS": 100,
+      "OCCULT BLOOD": 150,
+      "REDUCING SUBSTANCES": 150
+    },
+    MICROSCOPY: {
+      "PERIPHERAL SMEAR": 600,
+      "SPUTUM FOR AFB": 800,
+      "SMEAR FOR MP": 600,
+      "SEMEN ANALYSIS": 200
+    },
+    COAGULATION: {
+      "D-DIMER": 1500,
+      "PT-INR": 400,
+      "APTT": 400
+    },
+    ENDOCRINOLOGY: {
+      "T3, T4, TSH": 500,
+      "FREE T3, FREE T4": 600,
+      "TSH": 300,
+      "LH": 500,
+      "PROLACTIN": 700,
+      "PROGESTERONE": 700,
+      "ESTRADIOL": 500,
+      "BETA HCG": 800,
+      "FOLIC ACID": 1000,
+      "TESTOSTERONE": 700,
+      "AMH": 2000,
+      "VITAMIN D (TOTAL)": 1000,
+      "VITAMIN B12": 1200,
+      "IRON": 400,
+      "CD3, CD4, CD8": 1500
+    },
+    PROFILES: [
+        {
+          name: "FEVER PROFILE 1",
+          tests: ["CBP", "WIDAL", "CRP"],
+          price: 700,
+        },
+        {
+          name: "FEVER PROFILE 2",
+          tests: ["CBP", "WIDAL", "CRP", "MP", "TOTAL BILIRUBIN", "RBS", "SC", "CUE"],
+          price: 1200,
+        },
+        {
+          name: "FEVER PROFILE 3",
+          tests: ["CBP", "WIDAL", "CRP", "MP", "TOTAL BILIRUBIN", "RBS", "SC", "CUE", "DENGUE"],
+          price: 2000,
+        },
+        {
+          name: "DIABETIC PROFILE",
+          tests: ["FBS", "PPBS", "HBA1C", "CUE"],
+          price: 700,
+        },
+        {
+          name: "LIVER FUNCTION TESTS (LFT)",
+          tests: ["TOTAL BILIRUBIN", "DIRECT BILIRUBIN", "INDIRECT BILIRUBIN", "SGOT", "SGPT", "ALP", "TOTAL PROTEINS", "ALB&GLB"],
+          price: 800,
+        },
+        {
+          name: "LIPID PROFILE",
+          tests: ["TOTAL CHOLESTEROL", "TRIGLYCERIDES", "HDL", "LDL", "VLDL"],
+          price: 500,
+        },
+        {
+          name: "KIDNEY (RENAL) PROFILE",
+          tests: ["SERUM CREATININE", "BLOOD UREA", "URIC ACID", "CUE", "CALCIUM"],
+          price: 500,
+        },
+        {
+          name: "GENERAL BODY CHECK-UP PROFILE",
+          tests: ["CBP", "HBA1C", "LFT", "KFT", "LIPID", "TFT", "VITAMIN-D", "VITAMIN B-12", "EGFR", "CRP", "CUE"],
+          price: 2500,
+        },
+      ]
+  };  
+
 export const specialityData = [
     {
         speciality: 'General physician',

@@ -11,7 +11,7 @@ const Login = () => {
   }
   
   return (
-    <form action="" className="min-h-[80vh] flex items-center">
+    <form action="POST" className="min-h-[80vh] flex items-center">
       <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-sm text-zinc-600 shadow-lg">
         <p className="text-2xl font-semibold">{UserState == "Sign Up" ? "Create Account" : "Login"}</p>
         <p className="">Please {UserState == "Sign Up" ? "Create Account" : "Login"} to book appointment.</p>
@@ -31,7 +31,7 @@ const Login = () => {
           <p className="">Password</p>
           <input className="border border-zinc-300 rounded w-full p-2 mt-1" type="password" onChange={(e:any) => setPassword(e.target.value)} value={password} required/>
         </div>
-        <button className="w-full rounded bg-primary py-2 text-white text-base">{UserState == "Sign Up" ? "Create Account" : "Login"}</button>
+        <button onClick={() => onSubmit} className="w-full rounded bg-primary py-2 text-white text-base">{UserState == "Sign Up" ? "Create Account" : "Login"}</button>
         {UserState == "Sign Up" ? (
           <p className="text-xs">Already have an account? <span className="text-primary cursor-pointer" onClick={() => setUserState("Login")}>Login</span></p>
         ) : (
