@@ -4,12 +4,12 @@ const About = () => {
   return (
     <div className="">
       <div className="text-center text-2xl pt-10 text-gray-500">
-      <p className="">CONTACT<span className="text-gray-700 font-medium"> US</span></p>
+      <p className="">ABOUT<span className="text-gray-700 font-medium"> US</span></p>
       </div>
 
       <div className="my-10 flex flex-col md:flex-row gap-12">
       <img src={assets.about_image} className='max-w-[360px] w-full' alt="" />
-      <div className="flex flex-col justify-center gap-6 w-2/4 text-sm text-gray-600">
+      <div className="flex flex-col justify-center gap-6 text-justify text-sm text-gray-600">
         <p className="">
         Welcome to Prescripto, your trusted partner in managing your healthcare needs conveniently and efficiently. At Prescripto, we understand the challenges individuals face when it comes to scheduling doctor appointments and managing their health records
         </p>
