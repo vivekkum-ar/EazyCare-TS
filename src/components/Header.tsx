@@ -17,10 +17,10 @@ const Header = () => {
               Book appointment <img className="w-3" src={assets.arrow_icon} alt="" />
             </a>
         </div>
-
-        <div className="md:w-1/2 relative">
-          <img className="absolute rounded-lg bottom-0 h-auto w-full" src={assets.header_img} alt="" />
+        <div className="md:w-1/2 relative ">
+          <img className="rounded-lg bottom-0 h-auto  w-full" src={assets.header_img} alt="" />
         </div>
+
     </div>
   )
 }

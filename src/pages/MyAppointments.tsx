@@ -20,6 +20,7 @@ const myAppointments = () => {
               <p className="text-xs">{doctor.address.line2}</p>
               <p className="text-sm mt-1"><span className="text-sm text-neutral-700 font-medium">{"Date & Time: "}</span> 25 July, 2024 | 8:30 PM</p>
             </div>
+            <div></div>
               <div className="flex flex-col gap-3 justify-end ">
                 <button className="text-sm text-stone-500 text-centersm:min-w-40 py-2 border rounded px-4 hover:bg-primary hover:text-white transition-all duration-300">Pay Online</button>
                 <button className="text-sm text-stone-500 text-centersm:min-w-40 py-2 border rounded px-4 hover:bg-red-600 hover:text-white transition-all duration-300">Cancel Appointment</button>
