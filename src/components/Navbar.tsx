@@ -5,11 +5,12 @@ import {Icon} from "@iconify/react";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  // const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const [token, setToken] = useState(true);
 
   return (
-    <div className="glass px-4 mt-2 flex justify-between items-center py-4 text-sm mb-5 border-b border-b-gray-400">
+    <div className="lg:px-4 mt-2 flex justify-between items-center py-4 text-sm mb-5 border-b border-b-gray-400">
+
       {/* <img
         className="w-44 cursor-pointer"
         src={assets.logo}
@@ -21,6 +22,7 @@ const Navbar = () => {
       <p className="italic text-xl absolute line-clamp-1 w-44 text-zinc-500 font-bold text-center scale-110"><span className="text-primary">Eazy</span>Care</p>
       </div>
 
+      {/* /* ------------------------------------------- Lg Menu ------------------------------------------  */}
       <ul className="hidden md:flex items-start gap-5 font-medium">
         <NavLink to={"/home"}>
           <li className="py-1 uppercase">Home</li>
@@ -42,7 +44,7 @@ const Navbar = () => {
       <div className="flex items-center gap-4">
         {token ? (
           <div className="flex items-center gap-2 cursor-pointer group relative">
-            <img className="w-8 rounded-full" src={assets.profile_pic} alt=""/>
+            <img className="hidden md:block w-8 rounded-full" src={assets.profile_pic} alt=""/>
             <img className="p-2.5" src={assets.dropdown_icon} alt=""/>
             <div className="absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block">
               <div className="min-w-48 bg-stone-100 rounded-xl flex flex-col gap-4 p-4">
@@ -60,6 +62,25 @@ const Navbar = () => {
             Create Account
           </button>
         )}
+        <img className="w-6 md:hidden" onClick={() => setShowMenu(true)} src={assets.menu_icon} alt="" />
+        {/* /* ---------------------------------------- Lg Menu Ends ----------------------------------------  */}
+
+        {/* /* ----------------------------------------- Mobile Menu ----------------------------------------  */}
+        <div className={`${showMenu ? "fixed w-full" : "h-0 w-0"} md:hidden right-0 top-0 bottom-0 z-20 overflow-hidden bg-white transition-all `}>
+          <div className="flex items-center justify-between px-5 py-6">
+          <div onClick={() => navigate("/")} className="flex flex-row relative items-center gap-2 cursor-pointer">
+      <Icon icon={"raphael:paper"} className="w-10 h-10 text-primary"/>
+      <p className="italic text-xl absolute line-clamp-1 w-44 text-zinc-500 font-bold text-center scale-110"><span className="text-primary">Eazy</span>Care</p>
+      </div>
+            <img src={assets.cross_icon} onClick={() => setShowMenu(false)} alt="" className="w-7" />
+          </div>
+          <ul className="flex flex-col items-center gap-2 px-5 text-lg font-medium">
+            <NavLink onClick={() => setShowMenu(false)} to={"/"}><p  className="px-4 py-2 rounded inline-block">HOME</p></NavLink>
+            <NavLink onClick={() => setShowMenu(false)} to={"/doctors"}><p  className="px-4 py-2 rounded inline-block">ALL DOCTORS</p></NavLink>
+            <NavLink onClick={() => setShowMenu(false)} to={"/about"}><p  className="px-4 py-2 rounded inline-block">ABOUT</p></NavLink>
+            <NavLink onClick={() => setShowMenu(false)} to={"/contact"}><p  className="px-4 py-2 rounded inline-block">CONTACT</p></NavLink>
+          </ul>
+        </div>
       </div>
     </div>
   );
