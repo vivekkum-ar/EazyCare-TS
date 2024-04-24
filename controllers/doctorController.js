@@ -1,3 +1,4 @@
+import doctorModel from "../model/doctorModel.js"
 
 /* ------------------------------------- API for adding user ------------------------------------ */
 
@@ -11,4 +12,26 @@ const addUser = async (req,res) => {
     }
 }
 
-export { addUser }
+const changeAvilability = async (req,res) => {
+    try {
+        const { docId } = req.body
+        const docData = await doctorModel.findById(docId)
+        await doctorModel.findByIdAndUpdate(docId,{
+            avilable:!docData.avilable
+        })
+        res.json({status:true,message:"Doctor availability changed"})
+    } catch (error) {
+        res.json({status:false,message:error.message})
+    }
+}
+
+const doctorList = async (req,res) => {
+    try {
+        const doctors = await doctorModel.find({}).select(['-password','-email'])
+        res.json({status:true,doctors})
+    } catch (error) {
+        res.json({status:false,message:error.message})
+    }
+}
+
+export { changeAvilability,doctorList }

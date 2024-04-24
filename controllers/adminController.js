@@ -12,10 +12,10 @@ const addDoctor = async (req,res) => {
         
         /* ------------------------------ checking all data to add doctors ------------------------------ */
         if( !name || !email || !password || !speciality || !degree || !experience || !about || !fees || !address ){
-            return res.json({
-                success:false,
-                message:"Missing details"
-            })
+            return res.status(400).json({
+                success: false,
+                message: "All fields are required"
+            });
         }
         /* ----------------------------------- Validating email format ---------------------------------- */
         // if(validator.isEmail(email)){
@@ -95,4 +95,18 @@ const loginAdmin = async (req,res) => {
         })
     }
 }
-export { addDoctor,loginAdmin } 
+
+/* --------------------------------- API to get all doctors list -------------------------------- */
+const allDoctors = async (req,res) => {
+    try {
+        const doctors = await doctorModel.find({}).select('-password')
+        res.json({success: true,doctors})
+    } catch (error) {
+        res.json({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+export { addDoctor,loginAdmin,allDoctors } 
