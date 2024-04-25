@@ -9,10 +9,12 @@ import MyAppointments from "./pages/MyAppointments";
 import MyProfile from "./pages/MyProfile";
 import Footer from "./pages/Footer";
 import Contact from "./pages/Contact";
+import { ToastContainer } from "react-toastify";
 
 export default function App() {
   return (
     <div className="mx-4 sm:mx[10%]">
+      <ToastContainer />
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home/>}></Route>
