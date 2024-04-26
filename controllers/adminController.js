@@ -13,6 +13,13 @@ const addDoctor = async (req,res) => {
                 message:"Missing details"
             })
         }
+        /* ----------------------------------- Validating email format ---------------------------------- */
+        if(validator.isEmail(email)){
+            return res.json({
+                success:false,
+                message:"Please enter a valid email"
+            })
+        }
         console.log({ name,email,password,speciality,degree,experience,about,fees,address },imageFile)
     } catch (error) {
         
