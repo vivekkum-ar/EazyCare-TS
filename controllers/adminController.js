@@ -63,12 +63,10 @@ const addDoctor = async (req,res) => {
         })
         
     } catch (error) {
-        console.log({ name,email,password,speciality,degree,experience,about,fees,address },imageFile)
         res.json({
             success:false,
             message:error.message
         })
-        
     }
 } 
 
