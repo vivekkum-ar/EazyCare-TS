@@ -9,7 +9,6 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const onSumbitHandler = async (event) => {
     event.preventDefault();
 
@@ -31,7 +30,8 @@ const Login = () => {
         }
       }
     } catch (error) {
-      
+      // console.log("Error: ", error)
+      toast.error(error.message)
     }
   }
   return (
