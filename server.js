@@ -5,6 +5,7 @@ import connectDB from "./config/mongodb.js"
 import connectCloudinary from "./config/cloudinary.js"
 import adminRouter from "./routes/adminRoute.js"
 import doctorRouter from "./routes/doctorRoute.js"
+import userRouter from "./routes/userRoute.js"
 
 /* ----------------------------------------- App Config ----------------------------------------- */
 const app = express()
@@ -26,6 +27,8 @@ app.use('/api/doctor',doctorRouter)
 app.get("/",(req,res) => {
     res.send("API is Working")
 })
+
+app.use("/api/user",userRouter)
 
 /* ----------------------------------------- API Listen ----------------------------------------- */
 app.listen(port,()=> {
