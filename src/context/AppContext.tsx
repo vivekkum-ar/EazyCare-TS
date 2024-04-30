@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 export const AppContext = createContext<Value>({
     doctors: [],
-    currencySymbol: "$"
+    currencySymbol: "$",
 });
 
 export interface Value {
@@ -24,15 +24,46 @@ export interface Value {
         };
     }[];
     currencySymbol: string;
+    token?: string | null;
+    setToken?: any
+    backendUrl?: string;
+    userData?: any;
+    setUserData?: any;
+    loadUserProfileData?: any;
 }
 const AppContextProvider = (props:any) => {
 
     const currencySymbol = "₹";
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [doctors,setDoctors] = useState([]);
+    const [userData,setUserData] = useState(false);
+    const [token,setToken] = useState(localStorage.getItem("token") ? localStorage.getItem("token") : "");
+
+    const loadUserProfileData = async () => {
+        try {
+            const data = await axios.get(backendUrl+"/api/user/get-profile", {headers:{token}});
+            if(data.data.success){
+                setUserData(data.data.userData);
+                // console.log(data.data.userData)
+            } else{
+                console.log("userData")
+                toast.error(data.data.message);
+            }
+            
+        } catch (error:any) {
+            console.log(error);
+            toast.error(error?.message);
+        }
+    }
     const value:Value = {
         doctors,
-        currencySymbol
+        currencySymbol,
+        token,
+        setToken,
+        backendUrl,
+        userData,
+        setUserData,
+        loadUserProfileData
     }
     
     const getDoctorsData = async () => {
@@ -42,17 +73,27 @@ const AppContextProvider = (props:any) => {
             if(data.data.status){
                 setDoctors(data.data.doctors);
             }
-        } catch (error:any) {
+        } catch (error: any) {
             console.log(error);
-            toast.error(error?.message);
+            toast.error(error.response?.data?.message || error.message || "An unexpected error occurred");
         }
     }
+
+    
 
     useEffect(() => {
         getDoctorsData();
         // toast.success("Doctors data fetch started!");
     },[])
-
+    
+    useEffect(() => {
+        if(token){
+            loadUserProfileData();
+        }else{
+            setUserData(false);
+        }
+    },[token])
+    
     return (
         <AppContext.Provider value={value}>
             {props.children}
