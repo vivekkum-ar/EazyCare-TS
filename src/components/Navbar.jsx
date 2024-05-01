@@ -3,6 +3,7 @@ import { assets } from "../assets/assets.js";
 import { AdminContext } from "../context/AdminContext.jsx";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { aToken,setAToken } = useContext(AdminContext);
@@ -13,6 +14,7 @@ const Navbar = () => {
     // console.log("Logged out")
     aToken && setAToken(""); 
     aToken && localStorage.removeItem("aToken");
+    toast.success("Logged out successfully")
   }
   return (
     <div className="flex justify-between items-center bg-white px-4 sm:px-10 py-3 border-b">
