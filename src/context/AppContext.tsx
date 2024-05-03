@@ -30,6 +30,7 @@ export interface Value {
     userData?: any;
     setUserData?: any;
     loadUserProfileData?: any;
+    getDoctorsData?:any;
 }
 const AppContextProvider = (props:any) => {
 
@@ -55,17 +56,8 @@ const AppContextProvider = (props:any) => {
             toast.error(error?.message);
         }
     }
-    const value:Value = {
-        doctors,
-        currencySymbol,
-        token,
-        setToken,
-        backendUrl,
-        userData,
-        setUserData,
-        loadUserProfileData
-    }
-    
+
+
     const getDoctorsData = async () => {
         try {
             const data = await axios.get(`${backendUrl}/api/doctor/list`);
@@ -78,6 +70,20 @@ const AppContextProvider = (props:any) => {
             toast.error(error.response?.data?.message || error.message || "An unexpected error occurred");
         }
     }
+
+    const value:Value = {
+        doctors,
+        getDoctorsData,
+        currencySymbol,
+        token,
+        setToken,
+        backendUrl,
+        userData,
+        setUserData,
+        loadUserProfileData
+    }
+    
+    
 
     
 
