@@ -225,4 +225,22 @@ const bookAppointment = async (req,res) => {
     }
 }
 
-export {registerUser,loginUser,getProfile,updateProfile,bookAppointment}
+/* ----------------------- API to get user appointments for myappointment ----------------------- */
+const listAppointments = async (req,res) => {
+    try {
+        const {userId} = req.body
+        const appointments = await appointmentModel.find({userId})
+        res.json({
+            success:true,
+            appointments
+        })
+    } catch (error) {
+        console.log(error)
+        return res.json({
+            status: false,
+            message: error.message
+        })
+    }
+}
+
+export {registerUser,loginUser,getProfile,updateProfile,bookAppointment,listAppointments}
