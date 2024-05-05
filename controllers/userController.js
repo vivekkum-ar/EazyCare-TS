@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken'
 import {v2 as cloudinary} from 'cloudinary'
 import doctorModel from '../model/doctorModel.js';
 import appointmentModel from '../model/appointmentModel.js';
-
+import razorpay from 'razorpay'
 /* --------------------------------- API to register a new user --------------------------------- */
 
 const registerUser = async (req, res) => {
@@ -243,4 +243,103 @@ const listAppointments = async (req,res) => {
     }
 }
 
-export {registerUser,loginUser,getProfile,updateProfile,bookAppointment,listAppointments}
+/* --------------------------------- API to cancel appointments --------------------------------- */
+const cancelAppointment = async (req,res) => {
+    try {
+        const { userId, appointmentId } = req.body;
+        const appointmentData = await appointmentModel.findById(appointmentId)
+        /* ----------------------------------- verify appointment user ---------------------------------- */
+        if(userId != appointmentData.userId){
+        return res.json({
+            status: false,
+            message: "Unauthorised Action"
+        })
+        } else{
+            await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled:true})
+            /* ------------------------------------ releasing doctor slot ----------------------------------- */
+            const {docId,slotDate,slotTime} = appointmentData
+            const doctorData = await doctorModel.findById(docId)
+            let slots_booked = doctorData.slots_booked
+            slots_booked[slotDate] = slots_booked[slotDate].filter(e => e !== slotTime )
+            await doctorModel.findByIdAndUpdate(docId,{slots_booked})
+            res.json({
+                status:true,
+                message: "Appointment Cancelled"
+            })
+        }
+    } catch (error) {
+        console.log(error)
+        return res.json({
+            status: false,
+            message: error.message
+        }) 
+    }
+}
+
+const razorpayInstance = new razorpay({
+    key_id:process.env.RAZORPAY_KEY_ID,
+    key_secret:process.env.RAZORPAY_KEY_SECRET
+})
+
+/* ---------------------- API to make payment of appointment using razorpay --------------------- */
+const paymentRazorpay = async (req,res) => {
+
+    try {
+         const { appointmentId } = req.body;
+    const appointmentData = await appointmentModel.findById(appointmentId)
+    if(!appointmentData && appointmentData.cancelled){
+        return res.json({
+            status: true,
+            message: "Appointment cancelled or not found"
+        })
+    }
+    /* --------------------------- Creating options for razorpay payments --------------------------- */
+    const options = {
+        amount: appointmentData.amount * 100,
+        currency: process.env.CURRENCY,
+        receipt:appointmentId
+    }
+    /* -------------------------------------- Creation of order ------------------------------------- */
+    const order = await razorpayInstance.orders.create(options)
+    return res.json({
+        status: true,
+        order
+    })
+    } catch (error) {
+        console.log(error)
+        return res.json({
+            status: false,
+            message: error.description
+        })
+    }
+    
+}
+
+/* ----------------------------- API to verify payment from razorpay ---------------------------- */
+const verifyRazorpay = async (req,res) => {
+    try {
+        const {razorpay_order_id} = req.body
+        const orderInfo = await razorpayInstance.orders.fetch(razorpay_order_id)
+        // console.log(orderInfo)
+        if(orderInfo.status == 'paid'){
+            await appointmentModel.findByIdAndUpdate(orderInfo.receipt,{payment:true})
+        return res.json({
+            status: true,
+            message: "Payment Successful"
+        })
+        } else {
+        return res.json({
+            status: false,
+            message: "Payment Failed"
+        })
+        }
+    } catch (error) {
+        console.log(error)
+        return res.json({
+            status: false,
+            message: error.description
+        })
+    }
+}
+
+export {registerUser,loginUser,getProfile,updateProfile,bookAppointment,listAppointments,cancelAppointment,paymentRazorpay,verifyRazorpay}
