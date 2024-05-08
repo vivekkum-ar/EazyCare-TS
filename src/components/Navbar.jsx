@@ -4,9 +4,11 @@ import { AdminContext } from "../context/AdminContext.jsx";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { DoctorContext } from "../context/doctorContext.jsx";
 
 const Navbar = () => {
   const { aToken,setAToken } = useContext(AdminContext);
+  const { dToken,setDToken } = useContext(DoctorContext)
   const navigate = useNavigate();
 
   const logout = () => {
@@ -14,6 +16,8 @@ const Navbar = () => {
     // console.log("Logged out")
     aToken && setAToken(""); 
     aToken && localStorage.removeItem("aToken");
+    dToken && setDToken(""); 
+    dToken && localStorage.removeItem("dToken");
     toast.success("Logged out successfully")
   }
   return (

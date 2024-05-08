@@ -3,6 +3,9 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
+  optimizeDeps: {
+    exclude: ['../backend'], // Prevent scanning backend
+  },
   plugins: [react()],
   server:{port:5174}
 })

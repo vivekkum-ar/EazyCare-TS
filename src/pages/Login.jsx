@@ -3,34 +3,40 @@ import {assets} from "../assets/assets.js"
 import { AdminContext } from '../context/AdminContext.jsx';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { DoctorContext } from '../context/doctorContext.jsx';
 const Login = () => {
   const [state,setState] = useState("Admin")
   const {backendUrl, setAToken} = useContext(AdminContext);
+  const {setDToken} = useContext(DoctorContext)
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const onSumbitHandler = async (event) => {
     event.preventDefault();
-
+    
     try {
-      if(state === "Admin"){
+      if(state == "Admin"){
         const response = await axios.post(backendUrl + "/api/admin/login", {
           email,
           password
         })
-        // console.log(response.data.success)
         if(response.data.success){
-          // console.log(response.data.token)
           localStorage.setItem("aToken", response.data.token)
           setAToken(response.data.token)
         }
         else{
           toast.error(response.data.message);
-          // console.log(response)
         }
+      } else{
+          const {data} = await axios.post(backendUrl+"/api/doctor/login",{email,password})
+          if(data.success){
+            localStorage.setItem("dToken", data.token)
+            setDToken(data.token)
+          } else{
+            toast.error(data.message);
+          }
       }
     } catch (error) {
-      // console.log("Error: ", error)
       toast.error(error.message)
     }
   }
