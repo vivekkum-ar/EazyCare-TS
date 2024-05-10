@@ -125,15 +125,14 @@ const doctorDashboard = async (req,res) => {
     try {
         const {docId} = req.body
         const appointments = await appointmentModel.find({docId})
-        const earnings = 0
+        let earnings = 0
+        let patients = []
         appointments.map((appointment,index) => {
             if (appointment.isCompleted || appointment.payment) {
                 earnings+=appointment.amount
             } 
-        })
-        let patients = []
-        appointments.map((appointment,index) => {
-            if (patients.includes(appointment.userId)) {
+            console.log(appointment.userId)
+            if (!patients.includes(appointment.userId)) {
                 patients.push(appointment.userId)
             } 
         })
@@ -142,7 +141,7 @@ const doctorDashboard = async (req,res) => {
             earnings:earnings,
             appointments:appointments.length,
             patients:patients.length,
-            latestAppointemts:appointments.reverse().slice(0,5)
+            latestAppointments:appointments.reverse().slice(0,5)
         }
 
         return res.json({
@@ -154,4 +153,30 @@ const doctorDashboard = async (req,res) => {
     }
 }
 
-export { changeAvilability,doctorList, loginDoctor,appointmentsDoctor, appointmentCancel, appointmentComplete, doctorDashboard }
+/* ------------------------- API to get doctor profile for doctor panel ------------------------- */
+const doctorProfile = async (req,res) => {
+    try {
+        const {docId} = req.body
+        const profileData = await doctorModel.findById(docId).select('-password')
+        return res.json({
+            success:true,
+            profileData
+        })
+
+    } catch (error) {
+        return res.json({success:false,message:error.message})
+    }
+}
+
+/* --------------------- API to update doctor profile data from doctor panel -------------------- */
+const updateDoctorProfile = async (req,res) => {
+    try {
+        const {docId,fees,address,available} = req.body
+        await doctorModel.findByIdAndUpdate(docId,{fees,address,available})
+        return res.json({success:true,message:"Profile updated"})
+    } catch (error) {
+        return res.json({success:false,message:error.message})
+    }
+}
+
+export { changeAvilability,doctorList, loginDoctor,appointmentsDoctor, appointmentCancel, appointmentComplete, doctorDashboard,doctorProfile, updateDoctorProfile }

@@ -32,5 +32,5 @@ app.use("/api/user",userRouter)
 
 /* ----------------------------------------- API Listen ----------------------------------------- */
 app.listen(port,()=> {
-    console.log(`App listening on port http://localhost:${port}`)
+    console.log(`App listening on port: ${port}`)
 })
