@@ -18,6 +18,7 @@ const App = () => {
 const {aToken} = useContext(AdminContext);
 const {dToken} = useContext(DoctorContext);
 
+
   return aToken || dToken ? (
     <div className="bg-[#f8f9fd]">
       <Navbar></Navbar>
