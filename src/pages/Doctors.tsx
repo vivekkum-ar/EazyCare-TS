@@ -44,10 +44,10 @@ useEffect(() => {
               <div key={index} onClick={() => navigate(`/appointment/${doctor._id}`)} className="flex flex-col items-center gap-4 border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500">
                 <img src={doctor.image} alt="" className="bg-blue-50" />
                 <div className="p-4 justify-start w-full flex flex-col">
-                <div className="flex items-center gap-2 text-sm text-center text-green-500">
-                  <p className="w-2 h-2 bg-green-500 rounded-full"></p>
-                  <p className="">Available</p>
-                </div>
+                <div className={`flex items-center gap-2 text-sm text-center ${doctor.available ? "text-green-500" : "text-gray-500"}`}>
+                <p className={`w-2 h-2 ${doctor.available ? "bg-green-500" : "bg-gray-500"} rounded-full`}></p>
+                <p className="">{doctor.available? "Available" : "Not Available"}</p>
+              </div>
                   <p className="text-gray-900 text-lg font-medium">{doctor.name}</p>
                   <p className="text-gray-600 text-sm">{doctor.speciality}</p>
                 </div>              

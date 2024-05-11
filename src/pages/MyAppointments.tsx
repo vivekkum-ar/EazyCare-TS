@@ -155,8 +155,8 @@ const MyAppointments = () => {
             </div>
             <div></div>
             <div className="flex flex-col gap-3 justify-end ">
-            {!appointment.cancelled && appointment.payment && <button className="sm:min-w-48 py-2 border text-stone-500 bg-indigo-50"> Paid </button> }
-              {!appointment.cancelled && !appointment.payment && (
+            {!appointment.cancelled && appointment.payment && !appointment.isCompleted &&  <button className="sm:min-w-48 py-2 border text-stone-500 bg-indigo-50"> Paid </button> }
+              {!appointment.cancelled && !appointment.payment && !appointment.isCompleted && (
                 <button
                   className="text-sm text-stone-500 text-centersm:min-w-40 py-2 border rounded px-4 hover:bg-primary hover:text-white transition-all duration-300"
                   onClick={() => appointmentRazorpay(appointment._id)}
@@ -165,7 +165,7 @@ const MyAppointments = () => {
                   Pay Online
                 </button>
               )}
-              {!appointment.cancelled && (
+              {!appointment.cancelled && !appointment.isCompleted && (
                 <button
                   className="text-sm text-stone-500 text-centersm:min-w-40 py-2 border rounded px-4 hover:bg-red-600 hover:text-white transition-all duration-300"
                   onClick={() => cancelAppointment(appointment._id)}
@@ -173,7 +173,7 @@ const MyAppointments = () => {
                   Cancel Appointment
                 </button>
               )}
-              {appointment.cancelled && (
+              {appointment.cancelled && !appointment.isCompleted && (
                 <button
                   disabled
                   className="flex flex-row gap-1 px-1 sm:min-w-48 py-2 border border-red-500 rounded text-red-500"
@@ -186,9 +186,11 @@ const MyAppointments = () => {
                   Appointment Cancelled
                 </button>
               )}
+              {appointment.isCompleted && (<button className="sm:min-w-48 py-2 border border-green-500 rounded text-green-500">Completed</button>)}
             </div>
           </div>
         ))}
+        
       </div>
     </div>
   );

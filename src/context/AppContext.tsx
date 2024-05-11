@@ -10,6 +10,7 @@ export const AppContext = createContext<Value>({
 
 export interface Value {
     doctors: {
+        available: Boolean;
         _id: string;
         name: string;
         image: string;
