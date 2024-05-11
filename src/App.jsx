@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import Login from './pages/login'
+import Login from './pages/Login'
 import Dashboard from './pages/Admin/Dashboard';
 import AllAppointments from './pages/Admin/AllAppointments';
 import DoctorsList from './pages/Admin/DoctorsList';
