@@ -11,7 +11,9 @@ createRoot(document.getElementById("root")).render(
     <AdminContextProvider>
       <DoctorContextProvider>
         <AppContextProvider>
+
           <App />
+        
         </AppContextProvider>
       </DoctorContextProvider>
     </AdminContextProvider>
