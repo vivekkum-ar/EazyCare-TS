@@ -1,0 +1,25 @@
+// Remove common event listeners blocking copy/select
+document.body.oncopy = null;
+document.body.oncut = null;
+document.body.onpaste = null;
+document.body.onselectstart = null;
+document.body.oncontextmenu = null;
+document.body.onmousedown = null;
+document.body.onmouseup = null;
+document.body.onkeydown = null;
+document.body.onkeyup = null;
+document.body.onkeypress = null;
+
+// Allow user-select in CSS
+const css = '* { user-select: text !important; -webkit-user-select: text !important; }';
+const style = document.createElement('style');
+style.type = 'text/css';
+style.appendChild(document.createTextNode(css));
+document.head.appendChild(style);
+
+// Optional: Remove overlays or annoying divs
+document.querySelectorAll('div, span, section').forEach(el => {
+    if (getComputedStyle(el).position === 'fixed' && getComputedStyle(el).zIndex > 1000) {
+        el.remove();
+    }
+});
